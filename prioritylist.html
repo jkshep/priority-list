@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Priority List</title>
+    <script type="text/javascript" src="index.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+</head>
+<body>
+    <h1>Priority List</h1>
+    <div id="form">
+        <div id="inputs">
+            <label for="title">Enter priority:</label>
+            <input type="text" id="title" size="25">
+            <span id="title-error" class="error">Priority must be given a name</span><br>
+            <label for="date">Enter due date (mm/dd):</label>
+            <input type="text" id="date" size="5">
+            <span id="date-error" class="error">Invalid date. Date must be in the form mm/dd</span><br>
+            <label for="time">Enter estimated time to complete (ex: 1h 30m):</label>
+            <input type="text" id="time" size="5">
+            <span id="time-error" class="error">Invalid time. Time must be in the form ##h ##m</span><br>
+        </div>
+        <button id="add">Add</button>
+    </div>
+    <table id="list">
+
+    </table>
+        <button id="clear">Clear</button>
+</body>
+</html>

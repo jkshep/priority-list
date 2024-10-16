@@ -1,0 +1,107 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: "Trebuchet MS", serif;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 2px solid white;
+}
+
+#add {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: green;
+    font-size: 14pt;
+}
+
+#clear {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    background: lightgray;
+    display: block;
+    color: black;
+}
+
+button {
+    padding: 5px 10px;
+    background: #fb6464;
+    border: solid 1px white;
+    color: white;
+    border-radius: 5px;
+}
+
+div {
+    text-align: center;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    padding: 5px;
+    border: white solid 2px;
+    border-radius: 10px;
+    width: 75%;
+    background-color: #393939;
+}
+
+th, td {
+    border: white solid 1px;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+#form {
+    background-color: #393939;
+    padding: 20px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px white;
+    border-radius: 10px;
+}
+
+#inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+#title {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#date {
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#time {
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.error {
+    display: none;
+    color: red;
+    background-color: white;
+    border: solid 1px red;
+    padding: 5px;
+    border-radius: 5px;
+}
