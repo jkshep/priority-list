@@ -15,6 +15,7 @@ h1 {
     padding: 10px 20px;
     background: green;
     font-size: 14pt;
+    border-color: white;
 }
 
 #clear {
@@ -38,7 +39,7 @@ div {
     text-align: center;
 }
 
-table {
+#list {
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
@@ -46,7 +47,7 @@ table {
     border: white solid 2px;
     border-radius: 10px;
     width: 75%;
-    background-color: #393939;
+    background-color: #161B23;
 }
 
 th, td {
@@ -56,8 +57,16 @@ th, td {
     text-align: center;
 }
 
+.fifty-five {
+    width: 55%;
+}
+
+.fifteen {
+    width: 15%;
+}
+
 #form {
-    background-color: #393939;
+    background-color: #161B23;
     padding: 20px;
     width: 50%;
     margin-left: auto;
@@ -71,9 +80,6 @@ th, td {
     flex-direction: column;
 }
 
-input {
-    margin-bottom: 10px;
-}
 
 label {
     margin-bottom: 10px;
@@ -104,4 +110,5 @@ label {
     border: solid 1px red;
     padding: 5px;
     border-radius: 5px;
+    margin-top: 10px;
 }

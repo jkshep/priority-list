@@ -187,8 +187,8 @@ const deleteButtonHandler = (title) => {
 
 const displayList = () => {
     const list = document.getElementById('list');
-    list.innerHTML = "<tr> <th width='55%'>Title</th> <th width='15%'>Date</th> " +
-        "<th width='15%'>Est. Time</th> <th width='15%'>Delete</th> </tr>";
+    list.innerHTML = "<thead> <th class='fifty-five'>Title</th> <th class='fifteen'>Date</th> " +
+        "<th class='fifteen'>Est. Time</th> <th class='fifteen'>Delete</th> </thead>";
 
     entries.sort(compareByDate);
     for (let i = 0; i < entries.length; i++) {
@@ -245,6 +245,7 @@ const createEntryHTML = (entry) => {
 const createDeleteButton = () => {
     const buttonCell = document.createElement('td');
     const deleteButton = document.createElement('button')
+    deleteButton.className = 'btn btn-danger';
     deleteButton.innerText = 'X';
 
     buttonCell.appendChild(deleteButton);
