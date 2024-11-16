@@ -1,4 +1,5 @@
 let entries = [];
+let selectedColor = 'transparent';
 
 /**
  * Validates the title of a priority
@@ -210,6 +211,7 @@ const addButtonHandler = () => {
             title: titleValue,
             date: dateValue,
             time: timeValue,
+            color: selectedColor
         }
 
         title.value = "";
@@ -220,7 +222,7 @@ const addButtonHandler = () => {
 
         entries.push(entry);
 
-        displayList();
+        displayList(entries);
 
         //save to local storage after adding
         const priorityList = document.getElementById('list').innerHTML;
@@ -238,7 +240,7 @@ const deleteButtonHandler = (title) => {
     entries = entries.filter(entry => entry.title !== title);
 
     clearList();
-    displayList();
+    displayList(entries);
 
     //save to local storage after deleting
     const priorityList = document.getElementById('list').innerHTML;
@@ -249,7 +251,7 @@ const deleteButtonHandler = (title) => {
 /**
  * Displays the priority lists after sorting the entries by date
  */
-const displayList = () => {
+const displayList = (entries) => {
     const list = document.getElementById('list');
     list.innerHTML = "<thead> <th class='fifty-five'>Title</th> <th class='fifteen'>Date</th> " +
         "<th class='fifteen'>Est. Time</th> <th class='fifteen'>Delete</th> </thead>";
@@ -268,7 +270,7 @@ const clearButtonHandler = () => {
     clearList();
     entries = [];
     localStorage.clear();
-    displayList();
+    displayList(entries);
 }
 
 /**
@@ -299,7 +301,7 @@ const compareByDate = (a, b) => {
 
 /**
  * Creates an HTML row element for the entry
- * @param entry an entry object containing a title, date, and time
+ * @param entry an entry object containing a title, date, time, and color
  * @returns {HTMLTableRowElement} an HTML row element representing the priority
  */
 const createEntryHTML = (entry) => {
@@ -307,6 +309,13 @@ const createEntryHTML = (entry) => {
 
     const entryTitle = document.createElement('td')
     entryTitle.innerText = entry.title;
+    entryTitle.style.backgroundColor = entry.color;
+    entryTitle.onclick = () => {
+        entry.color = selectedColor;
+        entryTitle.style.backgroundColor = selectedColor;
+        //save entry color change to local storage
+        localStorage.setItem('entries', JSON.stringify(entries));
+    }
     const entryDate = document.createElement('td')
     entryDate.innerText = entry.date;
     const entryTime = document.createElement('td')
@@ -328,7 +337,7 @@ const createEntryHTML = (entry) => {
 const createDeleteButton = () => {
     const buttonCell = document.createElement('td');
     const deleteButton = document.createElement('button')
-    deleteButton.className = 'btn btn-danger';
+    deleteButton.className = 'delete';
     deleteButton.innerText = 'X';
 
     buttonCell.appendChild(deleteButton);
@@ -337,14 +346,67 @@ const createDeleteButton = () => {
 }
 
 /**
+ * Handler for the category buttons. Changes the selected color and grays
+ * out unselected category buttons.
+ * @param catArray array of category button elements
+ * @param category the selected category
+ */
+const catButtonHandler = (catArray, category) => {
+    for (let i = 0; i < catArray.length; i++) {
+        catArray[i].style.opacity = "50%"
+    }
+    category.style.opacity = "100%"
+    selectedColor = window.getComputedStyle(category).backgroundColor;
+}
+
+/**
+ * Handler for the filter button. Displays only priorities categorized with the currently
+ * selected color.
+ */
+const filterButtonHandler = () => {
+    const filteredEntries = entries.filter(entry => entry.color === selectedColor);
+    clearList();
+    displayList(filteredEntries);
+}
+
+/**
+ * Handler for the no filter button. Displays the entire priority list.
+ */
+const noFilterButtonHandler = () => {
+    clearList();
+    displayList(entries);
+}
+
+/**
  * On window load method. Initializes the add and clear buttons. Gets the saved list
  * and entry array from local storage and displays the list on the screen.
  */
 window.onload = () => {
     const addButton = document.getElementById('add');
-    addButton.onclick = addButtonHandler;
     const clearButton = document.getElementById('clear');
+    const filterButton = document.getElementById('filter');
+    const noFilterButton = document.getElementById('noFilter');
+    addButton.onclick = addButtonHandler;
     clearButton.onclick = clearButtonHandler;
+    filterButton.onclick = filterButtonHandler;
+    noFilterButton.onclick = noFilterButtonHandler;
+
+
+
+    const catOne = document.getElementById('catOne');
+    const catTwo = document.getElementById('catTwo');
+    const catThree = document.getElementById('catThree');
+    const catFour = document.getElementById('catFour');
+    const catFive = document.getElementById('catFive');
+    const catNone = document.getElementById('catNone');
+
+    const catArray = [catOne, catTwo, catThree, catFour, catFive, catNone]
+
+    for (let i = 0; i < catArray.length; i++) {
+        catArray[i].onclick = () => {
+            return catButtonHandler(catArray, catArray[i]);
+        }
+    }
 
     const priorityList = localStorage.getItem('inputValue');
     if (priorityList) {
@@ -357,5 +419,9 @@ window.onload = () => {
     }
 
     clearList();
-    displayList();
+    displayList(entries);
 }
+
+//TODO: Check for XSS security
+//TODO: Confirmation popup for clearing list
+//TODO: Edit priority after adding to list

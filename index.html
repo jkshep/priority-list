@@ -10,25 +10,53 @@
 </head>
 <body>
     <h1>Priority List</h1>
+
+    <!-- Form Area -->
     <div id="form">
+
+        <!-- Input Area -->
         <div id="inputs">
+
+            <!-- Title -->
             <label for="title">Enter priority:</label>
             <input type="text" id="title" size="25">
             <span id="title-error" class="error">Priority must be given a name</span><br>
 
+            <!-- Date -->
             <label for="date">Enter due date (mm/dd):</label>
             <input type="text" id="date" size="5">
             <span id="date-error" class="error">Invalid date. Date must be in the form mm/dd</span><br>
 
+            <!-- Estimated Time -->
             <label for="time">Enter estimated time to complete (ex: 1h 30m):</label>
             <input type="text" id="time" size="5">
             <span id="time-error" class="error">Invalid time. Time must be in the form ##h ##m</span><br>
         </div>
+
+        <!-- Category Divider -->
+        <div id="category-div">
+            <h3>Categories</h3>
+            <button class="category" id="catOne"></button>
+            <button class="category" id="catTwo"></button>
+            <button class="category" id="catThree"></button>
+            <button class="category" id="catFour"></button>
+            <button class="category" id="catFive"></button>
+            <button class="category" id="catNone"></button>
+        </div>
         <button id="add">Add</button>
     </div>
+
+    <!-- Filter Area -->
+    <div id="filter-div">
+        <button id="filter">Filter</button>
+        <button id="noFilter">No Filter</button>
+    </div>
+
+    <!-- Priority List -->
     <table id="list">
 
     </table>
-        <button id="clear">Clear</button>
+
+    <button id="clear">Clear</button>
 </body>
 </html>

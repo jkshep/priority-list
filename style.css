@@ -1,23 +1,29 @@
+/* styling for the entire page */
 body {
     background-color: black;
     color: white;
     font-family: "Trebuchet MS", serif;
 }
 
+/* styling for the header at the top of the page */
 h1 {
     text-align: center;
     padding: 20px;
     border-bottom: 2px solid white;
 }
 
+/* styling for the add button */
 #add {
     margin-top: 10px;
     padding: 10px 20px;
     background: green;
     font-size: 14pt;
     border-color: white;
+    color: white;
+    border-radius: 5px;
 }
 
+/* styling for the clear button */
 #clear {
     margin-top: 30px;
     margin-left: auto;
@@ -25,9 +31,17 @@ h1 {
     background: lightgray;
     display: block;
     color: black;
+    border-radius: 5px;
+    border: 2px lightgray solid;
 }
 
-button {
+/* styling for the filter divider */
+#filter-div  {
+    margin-top: 35px;
+}
+
+/* styling for the delete buttons */
+.delete {
     padding: 5px 10px;
     background: #fb6464;
     border: solid 1px white;
@@ -35,14 +49,60 @@ button {
     border-radius: 5px;
 }
 
+/* styling for the categories divider */
+#category-div {
+    margin-bottom: 20px;
+}
+
+/* styling for every category button */
+.category {
+    height: 30px;
+    width: 30px;
+    border: 1px white solid;
+    opacity: 50%;
+}
+
+/* styling for the first category button */
+#catOne {
+    background: red;
+}
+
+/* styling for the second category button */
+#catTwo {
+    background: blue;
+}
+
+/* styling for the third category button */
+#catThree {
+    background: purple;
+}
+
+/* styling for the fourth category button */
+#catFour {
+    background: orange;
+}
+
+/* styling for the fifth category button */
+#catFive {
+    background: green;
+}
+
+/* styling for the no category button */
+#catNone {
+    background: transparent;
+    opacity: 100%;
+}
+
+/* styling all div elements */
 div {
     text-align: center;
 }
 
+/* styling for the table representing the priority list */
 #list {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 10px;
     padding: 5px;
     border: white solid 2px;
     border-radius: 10px;
@@ -50,6 +110,7 @@ div {
     background-color: #161B23;
 }
 
+/* styling for table headers and cells */
 th, td {
     border: white solid 1px;
     border-radius: 5px;
@@ -57,14 +118,17 @@ th, td {
     text-align: center;
 }
 
+/* styling to make element width 55% of container */
 .fifty-five {
     width: 55%;
 }
 
+/* styling to make element width 15% of container */
 .fifteen {
     width: 15%;
 }
 
+/* styling for form divider */
 #form {
     background-color: #161B23;
     padding: 20px;
@@ -75,34 +139,39 @@ th, td {
     border-radius: 10px;
 }
 
+/* styling for the inputs divider */
 #inputs {
     display: flex;
     flex-direction: column;
 }
 
-
+/* styling for all labels */
 label {
     margin-bottom: 10px;
 }
 
+/* styling for the title input */
 #title {
     width: 75%;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* styling for the date input */
 #date {
     width: 25%;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* styling for the time input */
 #time {
     width: 25%;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* styling for errors */
 .error {
     display: none;
     color: red;
