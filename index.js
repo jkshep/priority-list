@@ -1,5 +1,11 @@
 let entries = [];
 
+/**
+ * Validates the title of a priority
+ * @param title HTML input for title
+ * @param titleError HTML span for title error popup
+ * @returns {boolean} true if the title is valid and false if not
+ */
 const validateTitle = (title, titleError) => {
     let result = false;
     if (title.value.length !== 0) {
@@ -12,6 +18,12 @@ const validateTitle = (title, titleError) => {
     return result;
 }
 
+/**
+ * Validates the date of a priority
+ * @param date HTML input for date
+ * @param dateError HTML span for date error popup
+ * @returns {boolean} true if the date is valid and false if not
+ */
 const validateDate = (date, dateError) => {
     let result = false;
 
@@ -35,14 +47,37 @@ const validateDate = (date, dateError) => {
     return result;
 }
 
+/**
+ * Helper method for validateDate(). Determines if the passed month
+ * is valid
+ * @param month input for month from the user
+ * @returns {boolean} true if the number is an integer between 1 and 12, inclusive.
+ * Returns false otherwise
+ */
 const validMonth = (month) => {
     return Number.isInteger(month) && month >= 1 && month <= 12;
 }
 
+/**
+ * Helper method for validateDate(). Determines if the passed day
+ * is valid
+ * @param day input for day from the user
+ * @returns {boolean} true if the number is an integer between 1 and 31, inclusive.
+ * Returns false otherwise
+ */
 const validDay = (day) => {
     return Number.isInteger(day) && day >= 1 && day <= 31;
 }
 
+/**
+ * Helper method for validateTime(). Determines if the passed hour and minute
+ * values are valid in the format ##h ##m.
+ * @param num1 number indicating estimated hours
+ * @param num2 number indicating estimated minutes
+ * @param time HTML input for time
+ * @param timeError HTML span for time error popup
+ * @returns {boolean} true if the hour and minute values are numbers greater than 0 and false otherwise
+ */
 const validHourWithMin = (num1, num2, time, timeError) => {
     let result = false;
     num1 = parseInt(num1);
@@ -57,6 +92,14 @@ const validHourWithMin = (num1, num2, time, timeError) => {
     return result;
 }
 
+/**
+ * Helper method for validateTime(). Determines if the passed hour or minute
+ * values are valid in the format ##h or ##m
+ * @param num number indicating estimated hours or estimated minutes
+ * @param time HTML input for time
+ * @param timeError HTML span for time error popup
+ * @returns {boolean} true if the hour or minute value is a number greater than 0 and false otherwise
+ */
 const validHourOrMin = (num, time, timeError) => {
     let result = false;
     num = parseInt(num);
@@ -70,6 +113,12 @@ const validHourOrMin = (num, time, timeError) => {
     return result;
 }
 
+/**
+ * Validates the estimated time of a priority
+ * @param time HTML input for time
+ * @param timeError HTML span for time error popup
+ * @returns {boolean} true if the time is valid and false if not
+ */
 const validateTime = (time, timeError) => {
     let result = false;
     let length = time.value.length;
@@ -127,11 +176,18 @@ const validateTime = (time, timeError) => {
     return result;
 }
 
+/**
+ * Clears the HTML table element representing the priority list
+ */
 const clearList = () => {
     const list = document.getElementById('list');
     list.innerHTML = '';
 }
 
+/**
+ * Handler for the add button. Checks inputs for valid values and adds new priority
+ * to the list.
+ */
 const addButtonHandler = () => {
     const title = document.getElementById('title');
     const date = document.getElementById('date');
@@ -173,6 +229,11 @@ const addButtonHandler = () => {
     }
 }
 
+/**
+ * Handler for delete buttons. Deletes the priority containing the button from the
+ * priority list.
+ * @param title title of priority to be deleted
+ */
 const deleteButtonHandler = (title) => {
     entries = entries.filter(entry => entry.title !== title);
 
@@ -185,6 +246,9 @@ const deleteButtonHandler = (title) => {
     localStorage.setItem('entries', JSON.stringify(entries));
 }
 
+/**
+ * Displays the priority lists after sorting the entries by date
+ */
 const displayList = () => {
     const list = document.getElementById('list');
     list.innerHTML = "<thead> <th class='fifty-five'>Title</th> <th class='fifteen'>Date</th> " +
@@ -197,6 +261,9 @@ const displayList = () => {
     }
 }
 
+/**
+ * Handler for the clear button. Clears all priorities from the list.
+ */
 const clearButtonHandler = () => {
     clearList();
     entries = [];
@@ -204,6 +271,13 @@ const clearButtonHandler = () => {
     displayList();
 }
 
+/**
+ * Compares two dates in the format mm/dd
+ * @param a the first date
+ * @param b the second date
+ * @returns {number} -1 if the first date is before the second, 1 if the first date
+ * is after the second, and 0 if they are the same
+ */
 const compareByDate = (a, b) => {
     let numA = a.date;
     let numB = b.date;
@@ -223,6 +297,11 @@ const compareByDate = (a, b) => {
     }
 }
 
+/**
+ * Creates an HTML row element for the entry
+ * @param entry an entry object containing a title, date, and time
+ * @returns {HTMLTableRowElement} an HTML row element representing the priority
+ */
 const createEntryHTML = (entry) => {
     const entryHTML = document.createElement('tr');
 
@@ -236,12 +315,16 @@ const createEntryHTML = (entry) => {
 
     entryHTML.append(entryTitle, entryDate, entryTime, deleteButton);
     deleteButton.onclick = () => {
-        return deleteButtonHandler(deleteButton.parentNode.firstChild.textContent);
+        return deleteButtonHandler(entry.title);
     }
 
     return entryHTML;
 }
 
+/**
+ * Creates a table cell containing a delete button.
+ * @returns {HTMLTableCellElement} the table cell containing the delete button
+ */
 const createDeleteButton = () => {
     const buttonCell = document.createElement('td');
     const deleteButton = document.createElement('button')
@@ -253,6 +336,10 @@ const createDeleteButton = () => {
     return buttonCell;
 }
 
+/**
+ * On window load method. Initializes the add and clear buttons. Gets the saved list
+ * and entry array from local storage and displays the list on the screen.
+ */
 window.onload = () => {
     const addButton = document.getElementById('add');
     addButton.onclick = addButtonHandler;
@@ -272,11 +359,3 @@ window.onload = () => {
     clearList();
     displayList();
 }
-
-//BUG: can't delete task immediately upon reload
-//workaround - add a task, then all delete buttons become interactable
-//FIXED: clear and display list on window load
-
-//TODO: Validate input - Completed
-//TODO: Add styling for phones - Completed
-//TODO: Documentation
